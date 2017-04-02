@@ -73,7 +73,8 @@ Modified: examples/pagecallback.js
 The Chaos VPN back-end is made up of two cloud systems hosted on Linode: an OpenVPN and a server. The server was implemented using a Ubuntu 16.10 distro, which functions as a dynamic proxy-tester that continuously parses the Chaos Proxies to ensure performance. This is done by sending packages through the proxy themselves, and comparing the latency with a threshold established by a package not sent through the proxy. It then automatically removes inadequate proxies and replaces them with new ones, as well as maintaining a minimum number of proxies necessary. This ensures the Chaos Proxy database is only populated with efficient nodes.
 
 The purpose of the OpenVPN is to route https traffic from the host, to the VPN itself, through one of the proxies mentioned above, and finally to the destination. The VPN serves as a very safe and ethical layer that adds extra privacy for https traffic. This way, the ISP only sees traffic from the host to the VPN, from the VPN to the proxy, from the proxy to the destination, and all the way back. There is no connection between host and destination.
-Moving forward we will implement better ways of checking proxies, as well as gathering them. 
+
+Moving forward we will implement better ways of checking proxies, as well as gathering them. Moreover, we plan on implementing a machine learning environment, which would run on the server, that will choose which sites to scramble internet history with based on general site sentiment. This will be acomplished by running natural-language-processing and text analytics algorithms on the sites.
 
 
 
