@@ -15,7 +15,6 @@ admin.database().ref('/proxies').once('value').then((snapshot) => {
 	snapshot.forEach((childSnapshot) => {
 		var childKey = childSnapshot.key;
 		var childData = childSnapshot.val();
-//		console.log(childKey + ": " + childData.port)
 		ips.push(childKey)
 		ports.push(childData.port)
 	});

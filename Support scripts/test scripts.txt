@@ -1,0 +1,5 @@
+netstat -ant | awk '/ESTABLISHED|LISTEN|CLOSE_WAIT/ {print $6}' | \
+    sort | uniq -c | sort -n
+
+
+curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip 2>&1 tee speed.txt

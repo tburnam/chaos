@@ -1,3 +1,13 @@
+/* 
+NOTE: I have removed some of the client scripts
+    that take advantage from the core binary
+    updates, as the power of a truly undetectable
+    headless browser is quite large. The current build
+    will work for dev purposes and if you require the 
+    truly organic headless browsing please email: 
+    tyler@burnamtech.com and we can discuss it.
+*/
+
 "use strict";
 
 const phantom = require('phantom');
@@ -6,7 +16,8 @@ const phantom = require('phantom');
 (async function() {
 
     var fs = require('fs');
-    var urls = fs.readFileSync('/usr/local/chaos/sites.txt').toString().split("\n");
+    console.log("If it breaks check the path in chaos.js line 10 - hackathon debug")
+    var urls = fs.readFileSync('/usr/local/chaos/resources/sites.txt').toString().split("\n");
     shuffle(urls)
 
     // const urls = [

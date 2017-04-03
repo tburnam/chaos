@@ -12,19 +12,19 @@ class ViewController: NSViewController {
     var frenzyModeOn = false;
     var mode9000ButtonOn = true;
     var statusTextOn = false;
-    
-    @IBAction func proxyButtonClick(_ sender: Any) {
-        
-        launchScript(scriptPath: "/usr/local/chaos/proxyMachine.js")
-    }
+    var proxyOn = false;
+
     var numberOfSitesCount = 0;
+    
+    // Main spectreTask
     var spectreTask : Process? = nil;
     
+    // Background images for main button
     @IBOutlet weak var over9000Image3: NSImageView!
     @IBOutlet weak var over9000Image2: NSImageView!
     @IBOutlet weak var over9000Image: NSImageView!
     
-    
+    @IBOutlet weak var allSitesVisitedLabel: NSTextField!
     @IBOutlet weak var mode9000: NSButton!
     @IBOutlet var urlListView: NSTextView!
     @IBOutlet weak var textView: NSScrollView!
@@ -41,6 +41,7 @@ class ViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
+        self.allSitesVisitedLabel.isHidden = true;
         self.textView.backgroundColor = NSColor(red:0.12, green:0.12, blue:0.18, alpha:1.0);
         self.urlListView.backgroundColor = NSColor(red:0.12, green:0.12, blue:0.18, alpha:1.0);
         
@@ -77,48 +78,26 @@ class ViewController: NSViewController {
 	}
 
     @IBAction func chaosButtonOnClick(_ sender: Any) {
-        if (!self.chaosClicked) {
-            
-            // Expose and reset
-            self.numberOfSitesCount = 0;
-            self.frenzyModeOn = false;
-            self.chaosClicked = !chaosClicked
-            self.chaosButton.image = NSImage(named: "chaosButton2")
-            self.mode9000.isHidden = false;
-            self.mode9000ButtonOn = true;
-            
-            // Hide
-            self.over9000Image.isHidden = true;
-            self.over9000Image2.isHidden = true;
-            self.over9000Image3.isHidden = true;
-            numberOfSitesLabel.isHidden = true;
-            self.statusTextOn = false;
-            sitesVisitedLabel.isHidden = true;
-            self.urlListView.textStorage?.mutableString.setString("")
-            
-            // Close
-            if (spectreTask != nil) {
-                print("PROCESS ID: \(spectreTask?.processIdentifier)")
-                spectreTask!.terminate();
-            }
-        }
-        else {
-            // LAUNCH
-            self.chaosClicked = !chaosClicked
-            self.chaosButton.image = NSImage(named: "chaosButtonPressed3")
-            self.numberOfSitesLabel.isHidden = false;
-            self.statusTextOn = true;
-            self.numberOfSitesLabel.textColor = NSColor.green
-            self.sitesVisitedLabel.isHidden = false;
-            self.mode9000.isHidden = true;
-            self.mode9000ButtonOn = false;
-            self.numberOfSitesCount = 0;
-            self.numberOfSitesLabel.stringValue = "\(self.numberOfSitesCount)"
-            
-            launchScript(scriptPath: "/usr/local/chaos/chaos.js")
-            
-            
-        }
+        self.allSitesVisitedLabel.isHidden = true;
+        self.launChaos()
+    }
+    
+
+    
+// TODO: This factory relies on a specific firebase setup. Will create issue to abstract
+    @IBAction func proxyButtonClick(_ sender: Any) {
+        
+        print("Not yet supported");
+        
+//        // MARK: Enter your path to "proxyMachine.js" and "proxyOff.js"
+//        if (!proxyOn) {
+//            launchScript(scriptPath: "/usr/local/chaos/chaosDaemonScripts/proxyMachine.js")
+//            proxyOn = !proxyOn
+//        }
+//        else {
+//            launchScript(scriptPath: "/usr/local/chaos/chaosDaemonScripts/proxyOff.js")
+//            proxyOn = !proxyOn
+//        }
     }
     
     @IBAction func moreViewsClick(_ sender: Any) {
@@ -171,23 +150,23 @@ class ViewController: NSViewController {
             self.numberOfSitesLabel.stringValue = "\(self.numberOfSitesCount)"
             self.urlListView.textStorage?.mutableString.setString("")
             
-            launchScript(scriptPath: "/usr/local/chaos/chaosOVER9000.js")
+            launchScript(scriptPath: "/usr/local/chaos/chaosDaemonScripts/chaosFrenzy.js")
             
             
         }
         
     }
     
-    @IBAction func githubClick(_ sender: Any) {
-        if let url = URL(string: "https://github.com/"), NSWorkspace.shared().open(url) {
-            print("default browser was successfully opened")
-        }
-    }
-    
+
     // Increments sites visited value and updates UI (fire)
     func updateCounter() {
         self.numberOfSitesCount = self.numberOfSitesCount + 1;
         self.numberOfSitesLabel.stringValue = "\(self.numberOfSitesCount)"
+        
+        if (numberOfSitesCount > 8500) {
+            self.allSitesVisitedLabel.isHidden = false;
+            self.launChaos()
+        }
         
         
         if (frenzyModeOn) {
@@ -269,6 +248,50 @@ class ViewController: NSViewController {
         }
     }
     
+    func launChaos() {
+        if (!self.chaosClicked) {
+            
+            // Expose and reset
+            self.numberOfSitesCount = 0;
+            self.frenzyModeOn = false;
+            self.chaosClicked = !chaosClicked
+            self.chaosButton.image = NSImage(named: "chaosButton2")
+            self.mode9000.isHidden = false;
+            self.mode9000ButtonOn = true;
+            
+            // Hide
+            self.over9000Image.isHidden = true;
+            self.over9000Image2.isHidden = true;
+            self.over9000Image3.isHidden = true;
+            numberOfSitesLabel.isHidden = true;
+            self.statusTextOn = false;
+            sitesVisitedLabel.isHidden = true;
+            self.urlListView.textStorage?.mutableString.setString("")
+            
+            // Close
+            if (spectreTask != nil) {
+                print("PROCESS ID: \(spectreTask?.processIdentifier)")
+                spectreTask!.terminate();
+            }
+        }
+        else {
+            // LAUNCH
+            self.chaosClicked = !chaosClicked
+            self.chaosButton.image = NSImage(named: "chaosButtonPressed3")
+            self.numberOfSitesLabel.isHidden = false;
+            self.statusTextOn = true;
+            self.numberOfSitesLabel.textColor = NSColor.green
+            self.sitesVisitedLabel.isHidden = false;
+            self.mode9000.isHidden = true;
+            self.mode9000ButtonOn = false;
+            self.numberOfSitesCount = 0;
+            self.numberOfSitesLabel.stringValue = "\(self.numberOfSitesCount)"
+            
+            launchScript(scriptPath: "/usr/local/chaos/chaosDaemonScripts/chaos.js")
+            
+            
+        }
+    }
     // FUNCTION - Launches node script given path to script
     func launchScript(scriptPath: String) {
         
@@ -279,6 +302,7 @@ class ViewController: NSViewController {
         delegate.spectreTask = task;
         
         // Set the task parameters
+        // MARK: Put your NODE v.7.7.4 OR HIGHER path here
         task.launchPath = "/Users/tylerburnam/.nvm/versions/node/v7.7.4/bin/node"
         task.arguments = [scriptPath]
         
@@ -316,6 +340,8 @@ class ViewController: NSViewController {
                         self.updateCounter()
                     }
                 }
+                
+                // DEBUG
                 print("PROCESS ID BEFORE: \(task.processIdentifier)")
                 outputHandle.waitForDataInBackgroundAndNotify()
             } else {
@@ -334,6 +360,5 @@ class ViewController: NSViewController {
         // Launch the task
         task.launch()
     }
-    
 }
 
