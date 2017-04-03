@@ -1,0 +1,9 @@
+#!/bin/bash
+
+COUNT=1
+while true; do
+  spectrejs ./linkScraper.js $COUNT
+  python ./linkCleaner.py $COUNT
+  COUNT=$((COUNT + 1))
+  sleep 5
+done

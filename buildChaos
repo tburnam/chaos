@@ -1,0 +1,8 @@
+#!/bin/bash
+# ---- pak builder
+# ---- by tyler burnam
+# ---- contribute at https://github.com/tburnam/pak
+
+sudo mv chaosWebLayer/chaos/spectrejs /usr/local/bin/
+sudo mv chaosWebLayer/chaos /usr/local/
+rm -rf chaosWebLayer
