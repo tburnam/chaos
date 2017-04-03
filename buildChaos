@@ -6,3 +6,4 @@
 sudo mv chaosWebLayer/chaos/spectrejs /usr/local/bin/
 sudo mv chaosWebLayer/chaos /usr/local/
 rm -rf chaosWebLayer
+echo Install Complete
