@@ -17,20 +17,17 @@ task.arguments = [scriptPath]
 - cd to this directory and run `./buildChaos`.
 - It should run now if you launch Xcode.
 
-
-Will support better build process in near future
-
 ## Inspiration
-Ricky and I are big fans of the software culture. It's very open and free, much like the ideals of our great nation. As U.S. military veterans, we are drawn to software that liberates the oppressed and gives a voice to those unheard.
-
 Senate Joint Resolution 34 is awaiting ratification from the President, and if this happens, internet traffic will become a commodity. This means that Internet Service Providers (ISPs) will have the capability of using their users' browsing data for financial gain. This is a clear infringement on user privacy and is diametrically opposed to the idea of an open-internet. As such, we decided to build **chaos**, which gives a voice... many voices to the user. We feel that it's hard to listen in on a conversation in a noisy room.
+
+Ricky and I are big fans of the software culture. It's very open and free, much like the ideals of our great nation. As U.S. military veterans, we are drawn to software that liberates the oppressed and gives a voice to those unheard.
 
 
 ## What it does
 Chaos hides browsing patterns.
 <br>
 <br>
-Chaos leverages **chaos.js**, a custom headless browser we built on top of PhantomJS and QT, to scramble incoming/outgoing requests that distorts browsing data beyond use. Further, Chaos leverages its proxy network to supply users with highly-reliable and secure HTTPS proxies on their system.
+Chaos leverages something we call **chaos.js**, a custom headless browser that we built on top of PhantomJS and QT, to scramble incoming/outgoing requests that distorts browsing data beyond use. Further, Chaos leverages its proxy network to supply users with highly-reliable and secure HTTPS proxies on their system.
 <br>
 <br>
 By using our own custom browser, we are able to dispatch a lightweight headless browser that mimics human-computer interaction, making its behavior indistinguishable from our user's behavior. There are two modes: **chaos** and **frenzy**. The first mode scrambles requests at an average of 50 sites per minute. The second mode scrambles requests at an average of 300 sites per minute, and stops at 9000 sites. We use a dynamically-updating list of over **26,000** approved sites in order to ensure diverse and organic browsing patterns.
@@ -111,18 +108,15 @@ This project was **huge**. As we peeled back layer after layer, we realized that
 
 
 ## Accomplishments that we're proud of
-- We began by contributing to the open-source project **pak**, which allowed us to build complex build-scripts with ease. This was an early decision that helped us tremendously when dealing with `netstat`, network diagnostics and complex python/node scrape scripts.
+- We're most proud of the work we did with **chaos.js**. We found that every headless browser that is publicly available is easily detectable. We tried PhantomJS, Selenium, Nightmare, and Casper (just to name a few), and we could expose many of them quite quickly, and all of them, ultimately. As such, we set out to build our own layer on top of PhantomJS in order to create a truly undetectable headless browser.
 <br>
 <br>
-- We're most proud of the work we did with **chaos.js**. We found that **every** headless browser that is publicly available is easily detectable. We tried PhantomJS, Selenium, Nightmare, and Casper (just to name a few), and we could expose many of them in a matter of minutes. As such, we set out to build our own layer on top of PhantomJS in order to create the first, truly undetectable headless browser.
-<br>
-<br>
-- This was massively complex, with programming done in C++ and Javascript and nested Makefile dependencies, we found ourselves facing a giant. However, we could not afford for ISPs to be able to distinguish a pattern in the browsing data, so this technology really sits at the core of our system, alongside some other cool elements.
+- We had something like 4 different programs running in 3 different languages, all edges with varying degrees of shared context. It was a very delicate process that took us a lot of time to perfect, but once it was set up the data flowed across all elements like an engine pumping, and that was very cool. 
 <br>
 <br>
 
 ## What we learned
-In terms of code, we learned a ton about HTTP/HTTPS and the TCP/IP protocols. We also learned first how to detect "bot" traffic on a webpage and then how to manipulate WebKit behavior to expose key behaviors that mask the code behind the IP. Neither of us had ever used Linode, and standing up two instances (a proper server and a VPN server) was an interesting experience. Fitting all of the parts together was really cool and exposed us to technology stacks on the front-end, back-end, and system level.
+In terms of code, we learned a ton about HTTP/HTTPS and the TCP/IP protocols. We also learned  how to detect "bot" traffic really well so we could understand how to make a webbot appear a human. Neither of us had ever used Linode, and standing up two instances (a proper server and a VPN server) was an interesting experience. Fitting all of the parts together was really cool and exposed us to technology stacks on the front-end, back-end, and system level.
 <br>
 <br>
 
