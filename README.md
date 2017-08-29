@@ -1,5 +1,9 @@
 ## Chaos
-
+[update]
+- Project won Best Cloud Project at HackPrinceton 2017
+- Team members: 
+	- Ricardo Taboada - ricardo.taboada.19@dartmouth.edu
+	- Tyler Burnam - tyler.r.burnam.19@dartmouth.edu
 ## Build steps
 
 ---
